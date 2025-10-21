@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LensCraft — Photography Portfolio</title>
+  <meta name="description" content="LensCraft — Photography portfolio showcasing landscapes, portraits, events and commercial work. Modern, responsive, and image-first." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0b0f14;--card:#0f1720;--muted:#9aa6b2;--accent:#ff6b6b;--glass: rgba(255,255,255,0.03);--radius:12px;font-family:Inter,system-ui,Arial}
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#05060a 0%, #0b0f14 100%);color:#f5f7f9;min-height:100vh}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#111827,var(--accent));display:flex;align-items:center;justify-content:center;font-weight:700;font-family:Playfair Display}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    .cta{background:var(--accent);padding:10px 14px;border-radius:10px;color:#0b0f14;text-decoration:none;font-weight:700}
+
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:22px}
+    .eyebrow{color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px}
+    h1{font-family:Playfair Display,serif;font-size:40px;margin:8px 0 12px}
+    p.lead{color:var(--muted);margin:0 0 20px}
+
+    .stats{display:flex;gap:12px;margin-top:16px}
+    .stat{background:var(--glass);padding:12px;border-radius:10px;text-align:center;min-width:110px}
+    .stat strong{display:block;font-size:20px}
+
+    .gallery{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .item{position:relative;overflow:hidden;border-radius:10px;cursor:pointer}
+    .item img{width:100%;height:260px;object-fit:cover;display:block;transition:transform .6s ease}
+    .item:hover img{transform:scale(1.06)}
+    .badge{position:absolute;left:10px;bottom:10px;background:rgba(0,0,0,0.5);padding:6px 8px;border-radius:8px;font-size:13px}
+
+    .about{display:flex;gap:20px;align-items:center;margin-top:36px}
+    .about img{width:260px;height:260px;object-fit:cover;border-radius:12px}
+    .about p{color:var(--muted)}
+
+    footer{margin-top:40px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(2,6,23,0.86);display:none;align-items:center;justify-content:center;padding:20px}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:95%;max-height:85%;border-radius:10px}
+    .lb-close{position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 10px;cursor:pointer}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .about{flex-direction:column}
+      .about img{width:100%;height:auto}
+    }
+    @media (max-width:560px){
+      .gallery{grid-template-columns:1fr}
+      h1{font-size:28px}
+      .logo{width:48px;height:48px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">LC</div>
+        <div>
+          <div style="font-weight:700">LensCraft</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:2px">Photography | Portraits • Landscapes • Events</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#gallery">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="#contact">Book a Shoot</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Portfolio</div>
+          <h1>Capturing moments — cinematic, honest & timeless</h1>
+          <p class="lead">I'm a visual storyteller specializing in portraits, landscapes and events. My work focuses on natural light, authentic moments and clean editing. Available for commissions worldwide.</p>
+
+          <div class="stats">
+            <div class="stat"><strong>8k+</strong><span style="color:var(--muted)">Followers</span></div>
+            <div class="stat"><strong>200+</strong><span style="color:var(--muted)">Projects</span></div>
+            <div class="stat"><strong>10 yrs</strong><span style="color:var(--muted)">Experience</span></div>
+          </div>
+        </div>
+
+        <aside>
+          <div style="background:var(--glass);padding:16px;border-radius:12px">
+            <div style="font-weight:700">Quick contact</div>
+            <form id="quickContact" style="margin-top:10px;display:grid;gap:8px" onsubmit="handleQuick(event)">
+              <input type="text" id="qname" placeholder="Your name" required style="padding:10px;border-radius:8px;border:none;background:rgba(255,255,255,0.02);color:inherit" />
+              <input type="email" id="qemail" placeholder="Email" required style="padding:10px;border-radius:8px;border:none;background:rgba(255,255,255,0.02);color:inherit" />
+              <input type="text" id="qservice" placeholder="Service (e.g., Wedding)" style="padding:10px;border-radius:8px;border:none;background:rgba(255,255,255,0.02);color:inherit" />
+              <button type="submit" style="padding:10px;border-radius:8px;border:none;background:var(--accent);font-weight:700;color:#0b0f14">Send</button>
+            </form>
+          </div>
+        </aside>
+      </section>
+
+      <section id="gallery">
+        <h2 style="margin-top:28px">Selected Work</h2>
+        <div class="gallery" id="galleryGrid">
+          <div class="item" data-src="https://picsum.photos/seed/p1/1200/900" data-caption="Misty Mountains"><img loading="lazy" src="https://picsum.photos/seed/p1/800/600" alt="Misty Mountains"/></div>
+          <div class="item" data-src="https://picsum.photos/seed/p2/1200/900" data-caption="Studio Portrait"><img loading="lazy" src="https://picsum.photos/seed/p2/800/600" alt="Studio Portrait"/></div>
+          <div class="item" data-src="https://picsum.photos/seed/p3/1200/900" data-caption="City Lights"><img loading="lazy" src="https://picsum.photos/seed/p3/800/600" alt="City Lights"/></div>
+          <div class="item" data-src="https://picsum.photos/seed/p4/1200/900" data-caption="Bride & Groom"><img loading="lazy" src="https://picsum.photos/seed/p4/800/600" alt="Bride & Groom"/></div>
+          <div class="item" data-src="https://picsum.photos/seed/p5/1200/900" data-caption="Desert Road"><img loading="lazy" src="https://picsum.photos/seed/p5/800/600" alt="Desert Road"/></div>
+          <div class="item" data-src="https://picsum.photos/seed/p6/1200/900" data-caption="Candid Moment"><img loading="lazy" src="https://picsum.photos/seed/p6/800/600" alt="Candid Moment"/></div>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <img src="https://picsum.photos/seed/portrait/600/600" alt="Photographer" />
+        <div>
+          <h3 style="margin-top:0">About me</h3>
+          <p style="max-width:70%">Hi — I'm Alex, a professional photographer with a decade of experience across weddings, editorial and commercial projects. My approach is unobtrusive and editorial: I look for natural emotion, strong composition and subtle, timeless edits.</p>
+          <p style="color:var(--muted)">Available for destination shoots. Gear: Full-frame mirrorless, prime lenses, portable lighting.</p>
+        </div>
+      </section>
+
+      <section id="contact" style="margin-top:28px">
+        <h2>Contact & Booking</h2>
+        <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-top:12px">
+          <div class="card" style="background:transparent;padding:0">
+            <form id="contactForm" onsubmit="handleContact(event)" style="display:grid;gap:8px">
+              <input type="text" id="name" placeholder="Your name" required style="padding:10px;border-radius:8px;border:none;background:rgba(255,255,255,0.02);color:inherit" />
+              <input type="email" id="email" placeholder="Email" required style="padding:10px;border-radius:8px;border:none;background:rgba(255,255,255,0.02);color:inherit" />
+              <input type="text" id="subject" placeholder="Subject" style="padding:10px;border-radius:8px;border:none;background:rgba(255,255,255,0.02);color:inherit" />
+              <textarea id="msg" rows="6" placeholder="Tell me about your project" required style="padding:10px;border-radius:8px;border:none;background:rgba(255,255,255,0.02);color:inherit"></textarea>
+              <button type="submit" style="padding:10px;border-radius:8px;border:none;background:var(--accent);font-weight:700;color:#0b0f14">Send Message</button>
+            </form>
+          </div>
+
+          <aside style="padding:14px;border-radius:12px;background:var(--glass)">
+            <div style="font-weight:700">Studio</div>
+            <div style="color:var(--muted);margin:8px 0">Email: hello@lenscraft.example</div>
+            <div style="color:var(--muted)">Phone: +91 98765 43210</div>
+            <div style="margin-top:12px;color:var(--muted)">Based in: Mumbai, India — Available for travel</div>
+          </aside>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div>&copy; <span id="year"></span> LensCraft — All rights reserved</div>
+      <div style="color:var(--muted)">Made with light & code • <a href="#contact" style="color:var(--muted);text-decoration:underline">Book a shoot</a></div>
+    </footer>
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+    <button class="lb-close" id="lbClose">Close ✕</button>
+    <img id="lbImg" src="" alt="" />
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Lightbox
+    const items = document.querySelectorAll('.item');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+
+    items.forEach(it=>{
+      it.addEventListener('click', ()=>{
+        const src = it.getAttribute('data-src');
+        const alt = it.getAttribute('data-caption') || '';
+        lbImg.src = src;
+        lbImg.alt = alt;
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden','false');
+      })
+    });
+    lbClose.addEventListener('click', ()=>{ lightbox.classList.remove('active'); lightbox.setAttribute('aria-hidden','true'); lbImg.src=''; });
+    lightbox.addEventListener('click', (e)=>{ if(e.target===lightbox) { lightbox.classList.remove('active'); lightbox.setAttribute('aria-hidden','true'); lbImg.src=''; } });
+
+    // Forms (placeholder handlers)
+    function handleQuick(e){ e.preventDefault(); alert('Thanks — we\'ll reach out soon.'); e.target.reset(); }
+    function handleContact(e){ e.preventDefault(); alert('Message sent — thank you!'); e.target.reset(); }
+  </script>
+</body>
+</html>
